@@ -24,14 +24,24 @@ public class MyServer {
             out = new PrintWriter(clientSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
+
+
+
+
             while(true) {
-                String command = in.readLine();
+                String command = null;
+
+                if (in.ready()) {
+                    command = in.readLine();
+                }
 
                 if (command == null) {
                     try { Thread.sleep(100); } catch (Exception e) {}
                     continue;
                 }
+
                 System.out.println(String.format("new command received from a cliend : %s" , command));
+
                 if (command.startsWith("write ")) {
                     String data = command.substring(6).strip();
                     String[] arr = data.split("\\|");
@@ -57,9 +67,11 @@ public class MyServer {
                 }
                 else {
                     out.println("unrecognised command");
+                    clientSocket.close();
                 }
 
             }
+
 
 
         } catch (Exception e) {

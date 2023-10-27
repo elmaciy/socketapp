@@ -28,8 +28,13 @@ public class MyClient {
     public String sendMessage(String msg) {
         try {
             System.out.println(String.format("sending message to the server : %s", msg));
+            System.out.println("#1");
             out.println(msg);
+            System.out.println("#2");
+            out.flush();
+            System.out.println("#4");
             String resp = in.readLine();
+            System.out.println("#5");
             return resp;
         } catch (Exception e) {
             e.printStackTrace();
