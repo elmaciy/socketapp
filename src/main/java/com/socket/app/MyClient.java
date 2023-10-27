@@ -28,13 +28,9 @@ public class MyClient {
     public String sendMessage(String msg) {
         try {
             System.out.println(String.format("sending message to the server : %s", msg));
-            System.out.println("#1");
             out.println(msg);
-            System.out.println("#2");
             out.flush();
-            System.out.println("#4");
             String resp = in.readLine();
-            System.out.println("#5");
             return resp;
         } catch (Exception e) {
             e.printStackTrace();
@@ -91,7 +87,10 @@ public class MyClient {
             String[] arr = response.split("\\|");
             String firstName = arr[0];
             String lasName = arr[1];
-            System.out.println(String.format("This is your data read from server database: First Name :  %s, Last Name : %s", firstName, lasName));
+            System.out.println(String.format("This is your data read from server database:  \n" +
+                    "   \tFirst Name .............  :  %s \n" +
+                    "   \tLast Name  .............. :  %s \n" ,
+                    firstName, lasName));
         } else {
             System.out.println(String.format("Your data is successfully written to server database"));
         }
